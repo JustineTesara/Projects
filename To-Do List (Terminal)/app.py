@@ -4,8 +4,11 @@ tasks = []
 
 def add_task():
     task = input("Enter a new task: ")
-    tasks.append(task)
-    print("Task added.")
+    if task.isdigit() or not task.strip():  # Check if the task is empty or just digits
+        print("Invalid task. Please enter a valid task description.")
+    else:
+        tasks.append(task)
+        print("Task added.")
 
 
 def view_task():
@@ -25,11 +28,11 @@ def clear_tasks():
 
 
 def mark_as_done():
-    if not tasks:
+    if not tasks:  # Check if there are any tasks to mark as done
         print("No tasks to mark as done.")
         return
     task_index = int(input("Enter the task number to mark as done: ")) - 1
-    if 0 <= task_index < len(tasks):
+    if 0 <= task_index < len(tasks):  # Validate the task index
         print(f"Task '{tasks[task_index]}' marked as done.")
         tasks.pop(task_index)
     else:
@@ -47,7 +50,7 @@ while True:
     user_prompt = input("Enter your choice: ")
     if user_prompt == "1":
         add_task()
-        print(f"Current tasks: {tasks}")
+
     elif user_prompt == "2":
         view_task()
     elif user_prompt == "3":
@@ -59,3 +62,6 @@ while True:
     elif user_prompt == "6":
         print("Program Terminated.")
         break
+    else:
+        print("Invalid choice. Please try again.")
+    print()  # Print a new line for better readability
