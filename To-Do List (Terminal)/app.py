@@ -19,16 +19,36 @@ def view_task():
 
 
 def delete_task():
-    print("Removed task.")
-    tasks.pop()
+    print("=== TASK DELETE MENU ===")
+    for i, task in enumerate(tasks):
+        print(f"{i}. {task}")
+    index_input = input(
+        "Enter the index of the task to delete (0 to {}): ".format(len(tasks) - 1))
+
+    if not index_input.isdigit() or int(index_input) < 0 or int(index_input) >= len(tasks):
+        print("Invalid index. Please enter a valid index.")
+        return
+    else:
+        removed_task = tasks.pop(int(index_input))
+        print(f"{removed_task} has been removed.")
 
 
 def clear_tasks():
-    print("Removed all tasks")
-    tasks.clear()
+    warning_input = input("Are you sure to delete all items? (y/n)")
+    if warning_input == "y":
+        print("Removed all tasks")
+        tasks.clear()
+    elif warning_input == "n":
+        print("Exit...")
+        pass
+    else:
+        print("Invalid user input.")
 
 
 def mark_as_done():
+    print("=== MARK AS DONE MENU ===")
+    for i, task in enumerate(tasks):
+        print(f"{i}. {task}")
     # [a.insert(4, b.pop(idx)) for idx in [b.index(10)]] - Move One List Element to Another List
     index_input = input(
         "Enter the index of the task to mark as done (0 to {}): ".format(len(tasks) - 1))
@@ -38,7 +58,7 @@ def mark_as_done():
     else:
         idx = int(index_input)
         [tasks_done.insert(0, tasks.pop(idx))
-         for idx in [0]] if tasks else None
+         for idx in [idx]] if tasks else None
         print("Marked as done.")
     print("Tasks done: ", tasks_done)
 
