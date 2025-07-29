@@ -1,5 +1,6 @@
 
 tasks = []
+tasks_done = []
 
 
 def add_task():
@@ -28,15 +29,24 @@ def clear_tasks():
 
 
 def mark_as_done():
-    if not tasks:  # Check if there are any tasks to mark as done
-        print("No tasks to mark as done.")
+    # [a.insert(4, b.pop(idx)) for idx in [b.index(10)]] - Move One List Element to Another List
+    index_input = input(
+        "Enter the index of the task to mark as done (0 to {}): ".format(len(tasks) - 1))
+    if not index_input.isdigit() or int(index_input) < 0 or int(index_input) >= len(tasks):
+        print("Invalid index. Please enter a valid index.")
         return
-    task_index = int(input("Enter the task number to mark as done: ")) - 1
-    if 0 <= task_index < len(tasks):  # Validate the task index
-        print(f"Task '{tasks[task_index]}' marked as done.")
-        tasks.pop(task_index)
     else:
-        print("Invalid task number.")
+        idx = int(index_input)
+        [tasks_done.insert(0, tasks.pop(idx))
+         for idx in [0]] if tasks else None
+        print("Marked as done.")
+    print("Tasks done: ", tasks_done)
+
+
+def mark_as_done_list():
+    print("Tasks done: ")
+    for task in tasks_done:
+        print(f"- {task}")
 
 
 while True:
@@ -46,11 +56,11 @@ while True:
     print("3. Delete a task")
     print("4. Delete all items")
     print("5. Mark as done")
-    print("6. Exit")
+    print("6. View completed tasks")
+    print("7. Exit")
     user_prompt = input("Enter your choice: ")
     if user_prompt == "1":
         add_task()
-
     elif user_prompt == "2":
         view_task()
     elif user_prompt == "3":
@@ -60,6 +70,8 @@ while True:
     elif user_prompt == "5":
         mark_as_done()
     elif user_prompt == "6":
+        mark_as_done_list()
+    elif user_prompt == "7":
         print("Program Terminated.")
         break
     else:
