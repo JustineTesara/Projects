@@ -60,7 +60,6 @@ def mark_as_done():
         [tasks_done.insert(0, tasks.pop(idx))
          for idx in [idx]] if tasks else None
         print("Marked as done.")
-    print("Tasks done: ", tasks_done)
 
 
 def mark_as_done_list():
@@ -97,3 +96,4 @@ while True:
     else:
         print("Invalid choice. Please try again.")
     print()  # Print a new line for better readability
+
