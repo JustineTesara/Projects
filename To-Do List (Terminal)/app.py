@@ -49,7 +49,6 @@ def mark_as_done():
     print("=== MARK AS DONE MENU ===")
     for i, task in enumerate(tasks):
         print(f"{i}. {task}")
-    # [a.insert(4, b.pop(idx)) for idx in [b.index(10)]] - Move One List Element to Another List
     index_input = input(
         "Enter the index of the task to mark as done (0 to {}): ".format(len(tasks) - 1))
     if not index_input.isdigit() or int(index_input) < 0 or int(index_input) >= len(tasks):
@@ -96,4 +95,5 @@ while True:
     else:
         print("Invalid choice. Please try again.")
     print()  # Print a new line for better readability
+
 
